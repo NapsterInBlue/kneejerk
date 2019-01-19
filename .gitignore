@@ -8,3 +8,7 @@ __pycache__/
 # virtual environments
 env
 
+
+
+# test space
+scratch/

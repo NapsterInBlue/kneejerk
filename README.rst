@@ -15,28 +15,26 @@ These instructions will get you a copy of the project up and running on your loc
 Prerequisites
 ~~~~~~~~~~~~~
 
-What things you need to install the software and how to install them
+Using the tool is as easy as ``pip`` installing it and leveraging the command line utility
 
 .. code:: none
 
-    Give Examples
+    pip install kneejerk
 
-Installing
-~~~~~~~~~~
+Using the Package
+~~~~~~~~~~~~~~~~~
 
-A step by step series of examples that tell you how to get development environment running
-
-Say what the step will be
+Generating user preferences
 
 .. code:: none
 
-    Give example
+     kneejerk -i im_dir -o preferences.csv
 
-And repeat
+Loading the data
 
-.. code:: none
+.. code:: python
 
-    Until finished
+
 
 End with a very simple demo of the core functionality of the tool.
 
