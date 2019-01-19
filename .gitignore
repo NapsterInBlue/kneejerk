@@ -1,0 +1,10 @@
+# Python junk
+
+.ipynb_checkpoints/
+__pycache__/
+
+
+
+# virtual environments
+venv
+
