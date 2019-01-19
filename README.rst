@@ -1,7 +1,11 @@
-Project Title
+kneejerk
 =============
 
-One paragraph of project description goes here
+Image data can be messy.
+
+Especially when considering the time it takes to label, persist, load, and operate-- generating datasets for user-preference Machine Learning projects can be a costly task.
+
+The main goal of ``kneejerk`` is to allow users to *quickly* key in scores as they're served images, persist those scores, and formulate a way to quickly load everything into a format consumable by any number of Data Science libraries.
 
 Getting Started
 ---------------
@@ -40,7 +44,20 @@ End with a very simple demo of the core functionality of the tool.
 Project Goals
 -------------
 
-What is the intended future of this project? What help is needed?
+- Quick command line interface that:
+
+   - Points at a directory and combs through all images
+   - Allows user to key in preference scores
+   - Saves results to ``.csv`` of (filepath, score)
+   - Allow for random shuffling of the order of images shown
+
+- Loader that converts from the ``.csv`` and image files to ``numpy``
+- Handle necessary data cleaning to resolve size mismatches
+
+- Unit tests
+- Published on PyPI
+- Documentation :)
+
 
 Contributing
 ------------
@@ -56,4 +73,4 @@ Explain how to run the automated tests for this system
 Authors
 -------
 
-Shout out any authors and their contributions, as well as contact info on how to get in touch to ask questions or get help-- Teams is great for this!
+Huge shout-out to `avlaskin <https://github.com/avlaskin>`_ on GitHub for early collaboration via his slick library ``quickLabel``, a really cool ``TkInter`` interface that does a very similar task. My data processing extended beyond the scope of his library and so I figured I'd start from scratch instead of blow up his PR feed :)
