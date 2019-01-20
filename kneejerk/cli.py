@@ -34,4 +34,13 @@ def main(output_dir, input_dir, file_name, shuffle):
 
     fpaths, scores = do_all_processing(input_dir, shuffle_files=shuffle)
 
+
+    # bit of helpful error handling if user doesn't provide any images
+    for val in os.listdir('.'):
+        if val[-3:].lower() in ['png', 'jpg']:
+            print('found image')
+            break
+    else:
+        print("\n\nDidn't find image at directory:", input_dir)
+
     persist_data(fpaths, scores, output_path)
