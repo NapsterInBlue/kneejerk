@@ -7,10 +7,11 @@ from .data.saver import persist_data
 
 
 @click.command()
+@click.option('--shuffle', '-s', help='Shuffle served image order', default=1)
 @click.option('--file-name', '-f', help='Name of .csv file')
 @click.option('--input-dir', '-i', help='Location of the images.')
 @click.option('--output-dir', '-o', help='Location to output .csv file.')
-def main(output_dir, input_dir, file_name):
+def main(output_dir, input_dir, file_name, shuffle):
     if not input_dir:
         input_dir = '.'
 
@@ -31,6 +32,6 @@ def main(output_dir, input_dir, file_name):
 
     output_path = output_dir.joinpath(file_name)
 
-    fpaths, scores = do_all_processing(input_dir)
+    fpaths, scores = do_all_processing(input_dir, shuffle_files=shuffle)
 
     persist_data(fpaths, scores, output_path)

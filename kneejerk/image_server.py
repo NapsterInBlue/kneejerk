@@ -2,6 +2,7 @@ import sys
 import os
 import pathlib
 import csv
+import random
 
 import cv2
 
@@ -16,14 +17,18 @@ scores = []
 
 
 
-def do_all_processing(input_dir):
+def do_all_processing(input_dir, shuffle_files=True):
     '''
     Given an input directory where images are located
     will serve up images for user scoring
     '''
     input_dir_path = pathlib.Path(input_dir)
 
-    for impath in os.listdir(input_dir):
+    files_in_dir = os.listdir(input_dir)
+    if shuffle_files:
+        random.shuffle(files_in_dir)
+
+    for impath in files_in_dir:
         if str(impath[-4:]).lower() not in ['.png', '.jpg']:
             continue
 
