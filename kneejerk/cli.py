@@ -32,7 +32,7 @@ def main(output_dir, input_dir, file_name):
     click.echo(f'Input dir {input_dir}')
     click.echo(f'Output dir {output_dir}')
 
-    output_path = str(output_dir) + os.sep + str(file_name)
+    output_path = output_dir.joinpath(file_name)
 
     fpaths, scores = do_all_processing(input_dir)
 
