@@ -1,7 +1,4 @@
-# leverage image server
-
 import click
-
 import pathlib
 import os
 
