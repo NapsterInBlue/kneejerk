@@ -1,4 +1,10 @@
 language: python
+python:
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
 
 # Install the apt prerequisites
 addons:
@@ -14,7 +20,9 @@ install:
 
 # Build the website
 script:
-  - python make.py
+  - cd docs && make html
+  - ghp-import -n -m "Publish docs" -b gh-pages docs/_build/html
+  - git push -u origin gh-pages
 
 # Deploy to GitHub pages
 deploy:
