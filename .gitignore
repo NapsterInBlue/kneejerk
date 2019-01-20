@@ -2,7 +2,7 @@
 
 .ipynb_checkpoints/
 __pycache__/
-
+*egg*
 
 
 # virtual environments
@@ -12,3 +12,4 @@ env
 
 # test space
 scratch/
+test.csv
