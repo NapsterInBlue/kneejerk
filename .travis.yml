@@ -18,9 +18,6 @@ install:
 # Build the website
 script:
   - cd docs && make html
-  - pwd
-  - ghp-import -n -m "Publish docs" -b gh-pages _build/html
-  - git push -u origin gh-pages
 
 # Deploy to GitHub pages
 deploy:
