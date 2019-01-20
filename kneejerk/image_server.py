@@ -13,7 +13,7 @@ def do_all_processing(input_dir):
 
     for impath in os.listdir(input_dir):
         built_fpath = input_dir_str + impath
-        fpaths.append()
+        fpaths.append(built_fpath)
         scores.append(score_image(impath))
 
 

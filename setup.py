@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
    name='kneejerk',
@@ -8,7 +8,7 @@ setup(
    author_email='NapsterInBlue@google.com',
    license='MIT',
    url='https://github.com/NapsterInBlue',
-   packages=['kneejerk'],  #same as name
+   packages=find_packages(include=['kneejerk', 'kneejerk.*']),  #same as name
    install_requires=['opencv-python',
                      'Click',
                      'matplotlib',

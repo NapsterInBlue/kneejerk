@@ -6,6 +6,7 @@ import pathlib
 import os
 
 from .image_server import do_all_processing
+from .data.saver import persist_data
 
 
 @click.command()
@@ -35,3 +36,4 @@ def main(output_dir, input_dir, file_name):
 
     fpaths, scores = do_all_processing(input_dir)
 
+    persist_data(fpaths, scores, output_path)
