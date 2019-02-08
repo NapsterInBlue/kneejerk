@@ -36,7 +36,7 @@ def main(output_dir, input_dir, file_name, shuffle):
 
 
     # bit of helpful error handling if user doesn't provide any images
-    for val in os.listdir('.'):
+    for val in os.listdir(input_dir):
         if val[-3:].lower() in ['png', 'jpg']:
             print('found image')
             break
