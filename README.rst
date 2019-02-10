@@ -66,11 +66,11 @@ ToDo
 Contributing
 ------------
 
-Bugs and Feature Requests should come in the form of [Issues in the project](https://github.com/NapsterInBlue/kneejerk/issues)
+Bugs and Feature Requests should come in the form of `Issues in the project <https://github.com/NapsterInBlue/kneejerk/issues>`_
 
-Contributions should only be made via [Pull Requests](https://github.com/NapsterInBlue/kneejerk/pulls), *after* an appropriate Issue has been opened.
+Contributions should only be made via `Pull Requests <https://github.com/NapsterInBlue/kneejerk/pulls>`_, *after* an appropriate Issue has been opened.
 
-Please see our [contribution guide](https://github.com/NapsterInBlue/kneejerk/blob/master/.github/CONTRIBUTING.md) if you've got more questions than that!
+Please see our `contribution guide <https://github.com/NapsterInBlue/kneejerk/blob/master/.github/CONTRIBUTING.md>`_ if you've got more questions than that!
 
 
 Running the tests
