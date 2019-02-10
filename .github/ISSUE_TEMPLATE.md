@@ -1,10 +1,6 @@
 <!--
 
-Have you read the Code of Conduct? By filing an Issue, you are expected to comply with it, including treating everyone with respect: http://shorty/codeofconduct
-
 This template has two sections: Bug Report and Feature Request. Fill out the appropriate section and delete the other, as well as this comment block!
-
-Do you want to ask a question? Are you looking for support? This project's Teams channel is the best place for getting help with this project.
 
 -->
 

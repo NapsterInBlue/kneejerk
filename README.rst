@@ -24,23 +24,26 @@ Using the tool is as easy as ``pip`` installing it and leveraging the command li
 Using the Package
 ~~~~~~~~~~~~~~~~~
 
-Generating user preferences
+Generating user preferences is as easy as using the command-line tool you just ``pip install`` 'ed.
 
 .. code:: none
 
-     kneejerk -i im_dir -o preferences.csv
+     kneejerk --input-dir im_dir --output-dir . --file-name preferences.csv --shuffle True
 
-Loading the data
+After you've generated your ``preferences.csv``, loading the data into ``X, y`` pairs of ``numpy.array`` 's looks like
 
 .. code:: python
 
+    from kneejerk.data.loader import load_normalized_image_data
 
-
-End with a very simple demo of the core functionality of the tool.
+    X, y = load_normalized_image_data('preferences.csv')
 
 
 Project Goals
 -------------
+
+Done
+~~~~~
 
 - Quick command line interface that:
 
@@ -52,6 +55,9 @@ Project Goals
 - Loader that converts from the ``.csv`` and image files to ``numpy``
 - Handle necessary data cleaning to resolve size mismatches
 
+ToDo
+~~~~
+
 - Unit tests
 - Published on PyPI
 - Documentation :)
@@ -60,13 +66,22 @@ Project Goals
 Contributing
 ------------
 
-Link to the ``.github/CONTRIBUTING`` file or any other supporting documentation to equip users to start contributing to this project. Most of your specifics should live there.
+Bugs and Feature Requests should come in the form of [Issues in the project](https://github.com/NapsterInBlue/kneejerk/issues)
+
+Contributions should only be made via [Pull Requests](https://github.com/NapsterInBlue/kneejerk/pulls), *after* an appropriate Issue has been opened.
+
+Please see our [contribution guide](https://github.com/NapsterInBlue/kneejerk/blob/master/.github/CONTRIBUTING.md) if you've got more questions than that!
 
 
 Running the tests
 ~~~~~~~~~~~~~~~~~
 
-Explain how to run the automated tests for this system
+This project uses a simple combination of the ``unittest.TestCase`` object and ``pytest``. All code should be tested, and all tests should be run from the root of the project via the simple call:
+
+.. code:: none
+
+    pytest
+
 
 Authors
 -------
