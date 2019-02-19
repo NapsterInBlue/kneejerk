@@ -8,9 +8,7 @@ A package for labelling image data with your quick, kneejerk reactions.
     :maxdepth: 2
     :Caption: Contents
 
-    introduction.rst
     tutorial.rst
-    api_reference.rst
     developing.rst
 
 
