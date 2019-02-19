@@ -39,6 +39,9 @@ After you've generated your ``preferences.csv``, loading the data into ``X, y`` 
     X, y = load_normalized_image_data('preferences.csv')
 
 
+Please see the :ref:`tutorial` section in the documentation for more clarification on how this all works!
+
+
 Project Goals
 -------------
 
