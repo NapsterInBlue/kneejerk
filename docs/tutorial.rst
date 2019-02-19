@@ -33,3 +33,60 @@ At this point our project structure looks like
             |--- bug_fixing.jpg
             |--- deep_learning.jpg
             |---- version_control.png
+
+
+Labeling
+----------
+
+Now we want to actually label our data.
+
+To do this, we'll leverage the ``kneejerk`` CLI that you got for free as a result of ``pip`` installing the library.
+
+Doing this is as simple as typing ``kneejerk`` and then populating the following options:
+
+
+- ``-i``, the location of the directory containing your images, defaulted to wherever you called ``kneejerk`` from
+- ``-f``, the name of the resulting ``.csv``, defaulted to ``output.csv``
+- ``-o``, the directory to dump the ``.csv`` from the last step. Also defaulted to wherever you called the tool
+- ``-s``, shuffles the order that images are served up, defaulted to ``True``
+
+
+On Our Data
+~~~~~~~~~~~~
+
+So in our case, if we wanted to launch the tool from the root diectory of ``scratch``, aimed at our images, and dropping a resulting ``.csv`` at the root of the project, we'd use the following:
+
+.. code:: none
+    
+    $ kneejerk -i images -o . -f example.csv -s True
+
+
+Which will immediately launch a ``matplotlib`` interface that waits for your keyed value for the image.
+
+.. image:: _static/cli_1.PNG
+    :width: 600
+
+Pressing your value will immediately log your score, close the current image, and open the next. This repeats until you've gone through the whole input directory.
+
+When this is finished, your project structure will now look like
+
+.. code:: none
+    
+    scratch
+     |
+     |--- images
+            |
+            |--- bug_fixing.jpg
+            |--- deep_learning.jpg
+            |---- version_control.png
+     |--- example.csv
+
+
+Inspecting, we'll see that the output file is of the form ``(filepath, score)``, like so (omitting my full firepath):
+
+.. code:: none
+
+    $ cat example.csv
+    scratch\images\bug_fixing.jpg,1
+    scratch\images\version_control.png,0
+    scratch\images\deep_learning.jpg,1
