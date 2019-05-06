@@ -20,12 +20,12 @@ def segment_data_from_csv(ctx, trainpct, testpct, valpct):
 
     df = pd.read_csv(file_name, names=['path', 'score'])
 
-    train, test = train_test_split(df, train_size=trainpct, stratify=df['score'])
+    train, test = train_test_split(df, test_size=testpct+valpct, stratify=df['score'])
 
     if valpct:
         # rescale the original pct
-        testpct = (testpct / (1 - trainpct))
-        test, cross_val = train_test_split(test, train_size=testpct, stratify=test['score'])
+        valpct = (valpct / (1 - trainpct))
+        test, cross_val = train_test_split(test, test_size=valpct, stratify=test['score'])
     else:
         cross_val = None
 
