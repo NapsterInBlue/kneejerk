@@ -1,8 +1,10 @@
 import csv
 import json
 
-
 import click
+
+from .utils import _ensure_path_exists
+
 
 def persist_scores(fpaths, scores, output_path):
     """
@@ -23,3 +25,11 @@ def persist_scores(fpaths, scores, output_path):
         for pair in sorted(zip(fpaths, scores),
                            key=lambda x: x[0]):
             csvout.writerow(pair)
+
+
+@click.pass_context
+def persist_metadata(ctx):
+    dirname = ctx.obj['dirname']
+    _ensure_path_exists(dirname)
+    with open(f'{dirname}/metadata.json', 'w') as f:
+        json.dump(ctx.obj, f)
