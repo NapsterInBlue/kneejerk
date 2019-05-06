@@ -71,6 +71,9 @@ def transfer(ctx, file_name, consider_size, rescale_len, trainpct, testpct, valp
 
     persist_metadata()
 
+    test, train, cross_val = segment_data_from_csv(trainpct, testpct, valpct)
+
+
 
 if __name__ == '__main__':
     main()
