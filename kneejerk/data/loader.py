@@ -3,7 +3,7 @@ import numpy as np
 
 
 def load_normalized_image_data(fpath, consider_size=False, rescale_len=200):
-    '''
+    """
     Given a csv with columns (image filepath, numeric score)
     convert a series of images to numpy arrays (with some
     pre-processing) as well as their corresponding target values
@@ -34,9 +34,9 @@ def load_normalized_image_data(fpath, consider_size=False, rescale_len=200):
         The numpy representation for each image in (R, G, B)
     y: numpy.array
         A float32 array of the target values for each image
-    '''
+    """
 
-    max_image_dim = get_max_image_dim(fpath)
+    max_image_dim = _get_max_image_dim(fpath)
 
     X = []
     y = []
@@ -61,12 +61,31 @@ def load_normalized_image_data(fpath, consider_size=False, rescale_len=200):
     return X, y
 
 
+def load_and_pad_images(impath, max_image_dim=None):
+    """
+    Iterate though all of the image filepaths, load the
+    images, then pad them with black, if necessary
+    """
+    imBGR = cv2.imread(impath)
+    im = cv2.cvtColor(imBGR, cv2.COLOR_BGR2RGB)
 
-def get_max_image_dim(fpath):
-    '''
+    if not max_image_dim:
+        max_image_dim = max(im.shape)
+
+    height_needed, width_needed = _determine_pad_amount(im, max_image_dim,
+                                                        max_image_dim)
+
+    im = np.pad(im, ((0, height_needed), (0, width_needed), (0, 0)),
+                mode='constant', constant_values=0)
+
+    return im
+
+
+def _get_max_image_dim(fpath):
+    """
     Open up all of the images to see their heights and widths.
     Keep a running max of each, which is returned at the end.
-    '''
+    """
 
     max_height = 0
     max_width = 0
@@ -89,32 +108,12 @@ def get_max_image_dim(fpath):
     return max(max_height, max_width)
 
 
-def load_and_pad_images(impath, max_image_dim=None):
-    '''
-    Iterate though all of the image filepaths, load the
-    images, then pad them with black, if necessary
-    '''
-    imBGR = cv2.imread(impath)
-    im = cv2.cvtColor(imBGR, cv2.COLOR_BGR2RGB)
-
-    if not max_image_dim:
-        max_image_dim = max(im.shape)
-
-    height_needed, width_needed = determine_pad_amount(im, max_image_dim,
-                                                       max_image_dim)
-
-    im = np.pad(im, ((0, height_needed), (0, width_needed), (0, 0)),
-                mode='constant', constant_values=0)
-
-    return im
-
-
-def determine_pad_amount(image_array, max_height, max_width):
-    '''
+def _determine_pad_amount(image_array, max_height, max_width):
+    """
     Given an image and desired max height/width,
     find how much height and width is needed to make
     the image the appropriate size
-    '''
+    """
 
     height, width, _ = image_array.shape
 

@@ -1,7 +1,10 @@
 import csv
+import json
 
 
-def persist_data(fpaths, scores, output_path):
+import click
+
+def persist_scores(fpaths, scores, output_path):
     """
     Given a list of fpaths to images, scores,
     and a place to save, generates a ``.csv``

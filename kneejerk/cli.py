@@ -3,7 +3,7 @@ import pathlib
 import os
 
 from kneejerk.image_server import score_images_in_dir
-from kneejerk.data.saver import persist_data
+from kneejerk.data.saver import persist_scores
 
 
 @click.group()
@@ -48,7 +48,7 @@ def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
     else:
         print("\n\nDidn't find image at directory:", input_dir)
 
-    persist_data(fpaths, scores, output_path)
+    persist_scores(fpaths, scores, output_path)
 
 
 @main.command(help='Use a kneejerk-generated csv to organize your files')

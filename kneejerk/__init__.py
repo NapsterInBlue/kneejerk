@@ -1,1 +1,1 @@
-from .data.saver import persist_data
+from .data.saver import persist_scores
