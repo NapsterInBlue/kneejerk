@@ -5,6 +5,7 @@ import os
 from kneejerk.image_server import score_images_in_dir
 from kneejerk.data.saver import persist_scores, persist_metadata
 from kneejerk.data.loader import segment_data_from_csv
+from kneejerk.data.utils import _get_classes, _get_max_image_dim, _ensure_path_exists
 
 
 @click.group()
@@ -67,11 +68,24 @@ def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
 @click.pass_context
 def transfer(ctx, file_name, consider_size, rescale_len, trainpct, testpct, valpct):
     ctx.obj['file_name'] = file_name
-    ctx.obj['dirname'] = file_name[:-4]
+    ctx.obj['max_image_dim'] = _get_max_image_dim(file_name)
 
-    persist_metadata()
+    dirname = file_name[:-4]
+    ctx.obj['dirname'] = dirname
+
+    classes = _get_classes(file_name)
+
+    data_splits = ['train', 'test']
+    if valpct:
+        data_splits += ['val']
+
+    for split in data_splits:
+        for class_ in classes:
+            _ensure_path_exists(os.path.join(dirname, split, class_))
 
     test, train, cross_val = segment_data_from_csv(trainpct, testpct, valpct)
+
+    persist_metadata()
 
 
 

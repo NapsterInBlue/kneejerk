@@ -1,5 +1,6 @@
 import os
 
+import pandas as pd
 import cv2
 
 
@@ -50,3 +51,8 @@ def _determine_pad_amount(image_array, max_height, max_width):
     width_needed = max_width - width
 
     return height_needed, width_needed
+
+
+def _get_classes(fpath):
+    df = pd.read_csv(fpath, names=['path', 'scores'])
+    return [str(x) for x in list(df['scores'].unique())]
