@@ -4,7 +4,7 @@ import os
 
 from kneejerk.image_server import score_images_in_dir
 from kneejerk.data.saver import persist_scores, persist_metadata
-from kneejerk.data.loader import segment_data_from_csv
+from kneejerk.data.loader import segment_data_from_csv, transfer_normalized_image_data
 from kneejerk.data.utils import _get_classes, _get_max_image_dim, _ensure_path_exists
 
 
@@ -84,6 +84,10 @@ def transfer(ctx, file_name, consider_size, rescale_len, trainpct, testpct, valp
             _ensure_path_exists(os.path.join(dirname, split, class_))
 
     test, train, cross_val = segment_data_from_csv(trainpct, testpct, valpct)
+
+    transfer_normalized_image_data(train, 'train', consider_size, rescale_len)
+    transfer_normalized_image_data(test, 'test', consider_size, rescale_len)
+    transfer_normalized_image_data(cross_val, 'val', consider_size, rescale_len)
 
     persist_metadata()
 

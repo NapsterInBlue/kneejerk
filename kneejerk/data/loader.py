@@ -1,3 +1,4 @@
+import os
 import cv2
 import click
 import numpy as np
@@ -32,9 +33,10 @@ def segment_data_from_csv(ctx, trainpct, testpct, valpct):
     return train, test, cross_val
 
 
-def transfer_normalized_image_data(fpath, consider_size=False, rescale_len=200):
+@click.pass_context
+def transfer_normalized_image_data(ctx, df, train_test_val, consider_size=False, rescale_len=200):
     """
-    Given a csv with columns (image filepath, numeric score)
+    Given a DataFrame with columns (image filepath, numeric score)
     convert a series of images to numpy arrays (with some
     pre-processing) as well as their corresponding target values
 
@@ -46,8 +48,10 @@ def transfer_normalized_image_data(fpath, consider_size=False, rescale_len=200):
 
     Parameters
     ----------
-    fpath: str, pathlike
-        Location of the csv you want to read from
+    df: pandas.DataFrame
+    train_test_val: str
+        Whether we're saving the data in 'train', 'test',
+        or 'val' directories
     consider_size: bool
         False: Each image follows the default behavior
                outlined above
@@ -66,29 +70,22 @@ def transfer_normalized_image_data(fpath, consider_size=False, rescale_len=200):
         A float32 array of the target values for each image
     """
 
-    max_image_dim = _get_max_image_dim(fpath)
+    dirname = ctx.obj['dirname']
+    max_image_dim = ctx.obj['max_image_dim']
 
-    X = []
-    y = []
+    for _, row in df.iterrows():
+        impath, score = row
 
-    with open(fpath) as f:
-        for row in f:
-            impath, score = row.split(',')
+        if consider_size:
+            im = load_and_pad_images(impath, max_image_dim)
+        else:
+            im = load_and_pad_images(impath)
 
-            if consider_size:
-                im = load_and_pad_images(impath, max_image_dim)
-            else:
-                im = load_and_pad_images(impath)
+        im = cv2.resize(im, (rescale_len, rescale_len))
 
-
-            im = cv2.resize(im, (rescale_len, rescale_len))
-            X.append(im)
-            y.append(float(score))
-
-    X = np.array(X)
-    y = np.array(y)
-
-    return X, y
+        imname = impath.split(os.sep)[-1]
+        fpath = os.path.join(dirname, train_test_val, str(score), imname)
+        cv2.imwrite(fpath, im)
 
 
 def load_and_pad_images(impath, max_image_dim=None):
@@ -96,8 +93,7 @@ def load_and_pad_images(impath, max_image_dim=None):
     Iterate though all of the image filepaths, load the
     images, then pad them with black, if necessary
     """
-    imBGR = cv2.imread(impath)
-    im = cv2.cvtColor(imBGR, cv2.COLOR_BGR2RGB)
+    im = cv2.imread(impath)
 
     if not max_image_dim:
         max_image_dim = max(im.shape)
