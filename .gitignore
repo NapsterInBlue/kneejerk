@@ -1,5 +1,4 @@
 # Python junk
-
 .ipynb_checkpoints/
 __pycache__/
 *egg*
@@ -8,8 +7,9 @@ __pycache__/
 # virtual environments
 env
 
-
+# pycharm
+.idea
 
 # test space
 scratch/
-test.csv
+*.csv

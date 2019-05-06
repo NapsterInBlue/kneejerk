@@ -108,9 +108,9 @@ The following file, ``foo.py``, saved and executed from the root directory of yo
 .. code:: python
     :linenos:
 
-    from kneejerk.data.loader import load_normalized_image_data
+    from kneejerk.data.loader import transfer_normalized_image_data
 
-    X, y = load_normalized_image_data('example.csv')
+    X, y = transfer_normalized_image_data('example.csv')
 
 
     print('Shape of image matrix:', X.shape)
@@ -192,7 +192,7 @@ This will give an image like the following
 Resolving Image Sizes
 ~~~~~~~~~~~~~~~~~~~~~
 
-We coded up two approaches for handing differences in image resolutions, flexible to your use case. Both of which correspond to the ``consider_size`` argument located in ``kneejerk.data.loader.load_normalized_image_data``.
+We coded up two approaches for handing differences in image resolutions, flexible to your use case. Both of which correspond to the ``consider_size`` argument located in ``kneejerk.data.loader.transfer_normalized_image_data``.
 
 Setting ``consider_size=False``, the default
 #############################################
