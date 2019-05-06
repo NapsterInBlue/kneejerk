@@ -2,11 +2,20 @@ import click
 import pathlib
 import os
 
-from .image_server import do_all_processing
-from .data.saver import persist_data
+from kneejerk.image_server import score_images_in_dir
+from kneejerk.data.saver import persist_data
 
 
-@click.command()
+@click.group()
+def main():
+    pass
+
+
+@main.command(help='Cycle through a directory and score images')
+@click.option('--input_dir', '-i', help='Location of the images.',
+              default='.')
+@click.option('--output_dir', '-o', help='Location to output .csv file.',
+              default='.')
 @click.option('--shuffle', '-s', help='Shuffle served image order',
               default=1)
 @click.option('--file-name', '-f', help='Name of .csv file',
@@ -27,15 +36,28 @@ def main(output_dir, input_dir, file_name, shuffle):
 
     output_path = output_dir.joinpath(file_name)
 
-    fpaths, scores = do_all_processing(input_dir, shuffle_files=shuffle)
-
+    fpaths, scores = score_images_in_dir(input_dir, shuffle_files=shuffle)
 
     # bit of helpful error handling if user doesn't provide any images
     for val in os.listdir(input_dir):
         if val[-3:].lower() in ['png', 'jpg']:
-            print('found image')
             break
     else:
         print("\n\nDidn't find image at directory:", input_dir)
 
     persist_data(fpaths, scores, output_path)
+
+
+@main.command(help='Use a kneejerk-generated csv to organize your files')
+@click.option('--file-name', '-f', help='Name of .csv file',
+              default='output.csv')
+@click.option('--input-dir', '-i', help='Location of the images.',
+              default='.')
+@click.option('--output-dir', '-o', help='Location to output .csv file.',
+              default='.')
+def transfer():
+    pass
+
+
+if __name__ == '__main__':
+    main()

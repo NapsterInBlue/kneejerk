@@ -16,12 +16,11 @@ fpaths = []
 scores = []
 
 
-
-def do_all_processing(input_dir, shuffle_files=True):
-    '''
+def score_images_in_dir(input_dir, shuffle_files=True):
+    """
     Given an input directory where images are located
     will serve up images for user scoring
-    '''
+    """
     input_dir_path = pathlib.Path(input_dir)
 
     files_in_dir = os.listdir(input_dir)
@@ -41,10 +40,10 @@ def do_all_processing(input_dir, shuffle_files=True):
 
 
 def score_image(impath):
-    '''
+    """
     Takes image path, displays the image,
     and connects keypress event to it
-    '''
+    """
     fig = serve_image(impath)
     fig.canvas.mpl_connect('key_press_event', handle_keypress)
 
@@ -52,11 +51,11 @@ def score_image(impath):
 
 
 def serve_image(impath):
-    '''
+    """
     Load up image with cv2 with RGB rendering
     return the ``matplotlib.Figure`` object it
     yields
-    '''
+    """
     im_arr = cv2.imread(str(impath))
     im_arr = cv2.cvtColor(im_arr, cv2.COLOR_BGR2RGB)
 
