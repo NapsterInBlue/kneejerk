@@ -5,6 +5,7 @@ import random
 
 import cv2
 import click
+import pandas as pd
 
 import matplotlib
 matplotlib.use('TkAgg')
@@ -35,6 +36,8 @@ def score_images_in_dir(input_dir, shuffle_files=True):
 
         fpaths.append(str(built_fpath.resolve()))
         score_image(built_fpath)
+
+    _get_scores_distribution(scores)
 
     return fpaths, scores
 
@@ -80,3 +83,13 @@ def handle_keypress(ctx, event):
     else:
         print(f'Acceptable keystrokes are in [{min_val}, {max_val}]')
         sys.stdout.flush()
+
+
+def _get_scores_distribution(scores):
+    sys.stdout.flush()
+
+    print('\n'*2)
+    df = pd.Series(scores).value_counts().to_frame('Count')
+    df['Percent'] = df['Count'] / df['Count'].sum()
+    print(df)
+    print('\n'*2)
