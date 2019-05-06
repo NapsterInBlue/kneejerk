@@ -7,8 +7,9 @@ from kneejerk.data.saver import persist_scores
 
 
 @click.group()
-def main():
-    pass
+@click.pass_context
+def main(ctx):
+    ctx.obj = dict()
 
 
 @main.command(help='Cycle through a directory and score images')
@@ -24,7 +25,6 @@ def main():
 @click.option('--max', 'max_', help='Maximum acceptable score', default='1')
 @click.pass_context
 def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
-    ctx.obj = dict()
     ctx.obj['min_val'] = min_
     ctx.obj['max_val'] = max_
 
@@ -52,13 +52,20 @@ def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
 
 
 @main.command(help='Use a kneejerk-generated csv to organize your files')
-@click.option('--file-name', '-f', help='Name of .csv file',
+@click.option('--file_name', '-f', help='Name of .csv file',
               default='output.csv')
-@click.option('--input-dir', '-i', help='Location of the images.',
-              default='.')
-@click.option('--output-dir', '-o', help='Location to output .csv file.',
-              default='.')
-def transfer():
+@click.option('--consider_size', '-c', help='Consider the size of the images',
+              default=0)
+@click.option('--rescale_len', '-r', help='Height/width to rescale the data to',
+              default=200)
+@click.option('--trainpct', help='Percentage of data to train on',
+              default=.70)
+@click.option('--testpct', help='Percentage of data to test on',
+              default=.20)
+@click.option('--valpct', help='Percentage of data to validate on',
+              default=.10)
+@click.pass_context
+def transfer(ctx, file_name, consider_size, rescale_len, trainpct, testpct, valpct):
     pass
 
 
