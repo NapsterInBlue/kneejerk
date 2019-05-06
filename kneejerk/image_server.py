@@ -86,10 +86,17 @@ def handle_keypress(ctx, event):
 
 
 def _get_scores_distribution(scores):
+    """
+    Prints a simple table showing class
+    counts and percentages of the total pop
+    :param scores: list
+    :return: None
+    """
     sys.stdout.flush()
 
-    print('\n'*2)
-    df = pd.Series(scores).value_counts().to_frame('Count')
-    df['Percent'] = df['Count'] / df['Count'].sum()
-    print(df)
-    print('\n'*2)
+    if len(scores):
+        print('\n'*2)
+        df = pd.Series(scores).value_counts().to_frame('Count')
+        df['Percent'] = df['Count'] / df['Count'].sum()
+        print(df)
+        print('\n'*2)

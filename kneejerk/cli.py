@@ -4,6 +4,7 @@ import os
 
 from kneejerk.image_server import score_images_in_dir
 from kneejerk.data.saver import persist_scores, persist_metadata
+from kneejerk.data.loader import segment_data_from_csv
 
 
 @click.group()
@@ -52,8 +53,7 @@ def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
 
 
 @main.command(help='Use a kneejerk-generated csv to organize your files')
-@click.option('--file_name', '-f', help='Name of .csv file',
-              default='output.csv')
+@click.option('--file_name', '-f', help='Name of .csv file', required=True)
 @click.option('--consider_size', '-c', help='Consider the size of the images',
               default=0)
 @click.option('--rescale_len', '-r', help='Height/width to rescale the data to',
@@ -66,6 +66,7 @@ def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
               default=.10)
 @click.pass_context
 def transfer(ctx, file_name, consider_size, rescale_len, trainpct, testpct, valpct):
+    ctx.obj['file_name'] = file_name
     ctx.obj['dirname'] = file_name[:-4]
 
     persist_metadata()
