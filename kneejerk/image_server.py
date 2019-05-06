@@ -1,10 +1,10 @@
 import sys
 import os
 import pathlib
-import csv
 import random
 
 import cv2
+import click
 
 import matplotlib
 matplotlib.use('TkAgg')
@@ -63,13 +63,20 @@ def serve_image(impath):
     return fig
 
 
-def handle_keypress(event):
-    '''
+@click.pass_context
+def handle_keypress(ctx, event):
+    """
     When user keys in a correct input, appends
     to the global ``scores`` variable
-    '''
-    print('press', event.key)
+    """
+    min_val = ctx.obj['min_val']
+    max_val = ctx.obj['max_val']
     sys.stdout.flush()
-    if event.key in ['0', '1']:
+
+    acceptable_vals = set(map(str, range(int(min_val), int(max_val)+1)))
+    if event.key in acceptable_vals:
         plt.close()
         scores.append(int(event.key))
+    else:
+        print(f'Acceptable keystrokes are in [{min_val}, {max_val}]')
+        sys.stdout.flush()
