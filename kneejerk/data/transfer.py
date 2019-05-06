@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from kneejerk.data.utils import _get_max_image_dim, _determine_pad_amount
+from kneejerk.data.utils import _determine_pad_amount
 
 
 @click.pass_context
@@ -34,7 +34,7 @@ def segment_data_from_csv(ctx, trainpct, testpct, valpct):
 
 
 @click.pass_context
-def transfer_normalized_image_data(ctx, df, train_test_val, consider_size=False, rescale_len=200):
+def transfer_normalized_image_data(ctx, df, train_test_val):
     """
     Given a DataFrame with columns (image filepath, numeric score)
     convert a series of images to numpy arrays (with some
@@ -52,6 +52,9 @@ def transfer_normalized_image_data(ctx, df, train_test_val, consider_size=False,
     train_test_val: str
         Whether we're saving the data in 'train', 'test',
         or 'val' directories
+
+    Command Line Params
+    -------------------
     consider_size: bool
         False: Each image follows the default behavior
                outlined above
@@ -71,6 +74,8 @@ def transfer_normalized_image_data(ctx, df, train_test_val, consider_size=False,
     """
 
     dirname = ctx.obj['dirname']
+    consider_size = ctx.obj['consider_size']
+    rescale_len = ctx.obj['rescale_len']
     max_image_dim = ctx.obj['max_image_dim']
 
     for _, row in df.iterrows():
