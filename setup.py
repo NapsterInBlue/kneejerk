@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
    name='kneejerk',
-   version='1.0.0',
+   version='1.0.1',
    description='A package for labelling image data with your quick, kneejerk reactions.',
    author='NapsterInBlue',
    author_email='NapsterInBlue@google.com',
