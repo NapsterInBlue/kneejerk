@@ -75,6 +75,7 @@ When this is finished, your project structure will now look like
     
     kneejerk_example
      |
+     |--- example.csv
      |--- images
      |      |
      |      |--- bart.jpg
@@ -85,7 +86,6 @@ When this is finished, your project structure will now look like
      |      |
      |      |---- wack.png
      |--- README.md
-     |--- example.csv
 
 
 And if we keyed in 9 ``0`` values followed by 9 ``1`` values, we could inspect the resulting ``.csv`` to see that it's of the form ``(filepath, score)``, like so (omitting my full firepath):
@@ -113,8 +113,91 @@ And if we keyed in 9 ``0`` values followed by 9 ``1`` values, we could inspect t
     kneejerk_workspace\images\wack.jpg,1
 
 
+Transferring
+------------
+
+Two things happen in this step:
+
+1) We use the ``.csv`` generated in the ``score`` step to organize all of our images into subdirectories split by scores
+2) We use the command-line arguments provided to ``kneejerk transfer`` to determine how we process/transform our images.
+    * See :ref:`on_image_dimensions` to understand the motivations for these arguments
+
+The arguments we can supply are as follows:
+
+- ``-f``, the name of the ``.csv`` file from the last step. Required.
+- ``-c, --consider_size``, whether or not we want the size of the image to be important. Choose from ``0/1``, defaulted to ``0``
+- ``-r, --rescale_len``, the height/width to resize each image to, defaulted to ``200``
+- ``--trainpct``, the proportion of the original dataset to split into *training* data, defaulted to ``.7``
+- ``--testpct``, the proportion of the original dataset to split into *testing* data, defaulted to ``.2``
+- ``--valpct``, the proportion of the original dataset to split into *cross-validation* data, defaulted to ``.1``
+    * If not supplied, this will become ``1 - trainpct - testpct``
+
+.. admonition:: A Couple Data Science Notes
+
+  - The ``trainpct``, ``testpct``, ``valpct`` attributes should add up to ``1``
+  - The underlying train/test/val function uses stratified sampling to maintain class balance. **You will run into errors** if the distribution of scores that you provide don't allow ``kneejerk`` to divide the images into neat subgroups by class
+
+
+
+On Our Data
+############
+
+Your results will likely vary here, depending on how you initially scored the images and how the underlying train/test/validation splitter shuffles the data. But let's run the following
+
+.. code:: none
+
+  kneejerk transfer --file_name example.csv
+
+
+It will think for a minute, then when it's finished running, your directory should look like
+
+.. code:: none
+    
+    kneejerk_example
+     |
+     |--- example.csv
+     |
+     |--- example
+     |      |
+     |      |-- metadata.json
+     |      |-- test
+     |      |    |
+     |      |    |- 0
+     |      |    |  | ...
+     |      |    |- 1
+     |      |       | ...
+     |      |
+     |      |-- train
+     |      |    |- 0
+     |      |    |  | ...
+     |      |    |- 1
+     |      |       | ...
+     |      |
+     |      |-- val
+     |      |    |- 0
+     |      |    |  | ...
+     |      |    |- 1
+     |      |       | ...
+     |
+     |--- images
+     |      | ...
+     |--- README.md
+
+Few things to point out here:
+
+- The directory name that houses all of your transformed/transferred corresponds to the name of your ``.csv``
+- ``example/metadata.json`` drops a ``JSON`` object containing all of the runtime conditions that build this structure, for versioning purposes
+- If ``valpct`` was ``0.0``, the directory will still be made, but empty
+- All of the images dropped into the resulting directories will be of size ``rescale_len X rescale_len``
+
+
+
 Loading
 -------
+
+
+
+
 
 In order to make our image data useful for any Machine Learning routine we want to build, we'll need to convert our images to numeric, matrix representations. The ``kneejerk.data.loader`` module handles this neatly.
 
