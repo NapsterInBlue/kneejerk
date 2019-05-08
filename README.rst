@@ -7,6 +7,16 @@ Especially when considering the time it takes to label, persist, load, and opera
 
 The main goal of ``kneejerk`` is to allow users to *quickly* key in scores as they're served images, persist those scores, and formulate a way to quickly load everything into a format consumable by any number of Data Science libraries.
 
+Motivation
+----------
+
+Ultimately, this library is intended to facilitate getting into the clean workflow outlined in François Chollet's excellent book `Deep Learning with Python <https://www.manning.com/books/deep-learning-with-python>`_.
+
+`Link to one of his notebooks <https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/5.2-using-convnets-with-small-datasets.ipynb>`_ outlining this workflow on a neat, pre-labeled dataset.
+
+In particular, we want to go from "big, unified directory of a ton of images" to "well-organized directories of images sorted into test/train/validation sets, by class." Crucially, though, **we want to do all of this file organization based on preferences that a user quickly generated using this library.**
+
+
 Getting Started
 ---------------
 
@@ -28,18 +38,19 @@ Generating user preferences is as easy as using the command-line tool you just `
 
 .. code:: none
 
-     kneejerk --input-dir im_dir --output-dir . --file-name preferences.csv --shuffle True
+     kneejerk score --input_dir im_dir --output_dir . --file_name preferences.csv
 
-After you've generated your ``preferences.csv``, loading the data into ``X, y`` pairs of ``numpy.array`` 's looks like
+After you've generated your ``preferences.csv`` you can transfer all of the images to the proper directory structure via
 
-.. code:: python
+.. code:: none
 
-    from kneejerk.data.loader import transfer_normalized_image_data
-
-    X, y = transfer_normalized_image_data('preferences.csv')
+    kneejerk transfer --file_name preferences.csv
 
 
-Please see the :ref:`tutorial` section in the documentation for more clarification on how this all works!
+From there, you're all set to use the ``ImageDataGenerator.flow_from_directory()`` functionality in `keras <https://keras.io/preprocessing/image/>`_, or any similar library.
+
+
+See the :ref:`tutorial` section in the documentation for more clarification on how this all works as well as some of the customization options.
 
 
 Project Goals
@@ -57,12 +68,13 @@ Done
 
 - Loader that converts from the ``.csv`` and image files to ``numpy``
 - Handle necessary data cleaning to resolve size mismatches
+- Published on PyPI
+
 
 ToDo
 ~~~~
 
 - Unit tests
-- Published on PyPI
 - Documentation :)
 
 

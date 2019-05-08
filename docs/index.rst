@@ -1,7 +1,7 @@
 kneejerk
 ==========================
 
-A package for labelling image data with your quick, kneejerk reactions.
+A package for scoring image data with your quick, kneejerk reactions, then organizing them for ingestion to Data Science pipelines
 
 
 .. toctree::
@@ -9,6 +9,7 @@ A package for labelling image data with your quick, kneejerk reactions.
     :Caption: Contents
 
     tutorial.rst
+    on_image_dimensions.rst
     developing.rst
 
 
