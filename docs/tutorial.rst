@@ -195,73 +195,43 @@ Few things to point out here:
 Loading
 -------
 
+Finally, we've provided a simple template, ``loader.py`` to illustrate how cheaply you can get up and running with your new dataset, pasted below for ease of reading
 
-
-
-
-In order to make our image data useful for any Machine Learning routine we want to build, we'll need to convert our images to numeric, matrix representations. The ``kneejerk.data.loader`` module handles this neatly.
-
-
-Generic Data Loading File
-#########################
-
-The following file, ``foo.py``, saved and executed from the root directory of your project is all you need to get all of your data loading out of the way and let you get to the fun stuff. Everything after line 3 is merely included for this tutorial.
 
 .. code:: python
-    :linenos:
 
-    from kneejerk.data.loader import transfer_normalized_image_data
-
-    X, y = transfer_normalized_image_data('example.csv')
+    from keras.preprocessing.image import ImageDataGenerator
 
 
-    print('Shape of image matrix:', X.shape)
-    print('Shape of score matrix:', y.shape)
+    TRAIN_DIR = 'example/train'
+    TEST_DIR = 'example/test'
+    VAL_DIR = 'example/val'
 
-    print('RGB values of the top-left 5x5 of the first image')
-    print(X[0, :5, :5])
+    train_datagen = ImageDataGenerator(rescale=1./255)
+    validation_datagen = ImageDataGenerator(rescale=1./255)
+
+    train_generator = train_datagen.flow_from_directory(
+            TRAIN_DIR,
+            target_size=(200, 200),
+            batch_size=2,
+            class_mode='binary'
+        )
+
+    validation_generator = validation_datagen.flow_from_directory(
+            VAL_DIR,
+            target_size=(200, 200),
+            batch_size=2,
+            class_mode='binary'
 
 
-Running this yields
+Running this will yield a printout informing you how your data got shuffled
 
 .. code:: none
 
-    $ python foo.py
-    Max height: 1587
-    Max width : 1587
-    Shape of image matrix: (3, 200, 200, 3)
-    Shape of score matrix: (3,)
-    RGB values of the top-left 5x5 of the first image
-    [[[215 215 215]
-      [210 210 210]
-      [207 207 207]
-      [207 207 207]
-      [209 209 209]]
-
-     [[217 217 217]
-      [212 212 212]
-      [209 209 209]
-      [207 207 207]
-      [209 209 209]]
-
-     [[219 219 219]
-      [213 213 213]
-      [210 210 210]
-      [207 207 207]
-      [209 209 209]]
-
-     [[219 219 219]
-      [213 213 213]
-      [210 210 210]
-      [208 208 208]
-      [208 208 208]]
-
-     [[221 221 221]
-      [215 215 215]
-      [211 211 211]
-      [210 210 210]
-      [210 210 210]]]
+    $ python loader.py
+    Using TensorFlow backend.
+    Found 18 images belonging to 2 classes.
+    Found 6 images belonging to 2 classes.
 
 
-
-see :ref:`on_image_dimensions`
+From this point on, the data munging is all taken care of and the real fun starts!
