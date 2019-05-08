@@ -38,13 +38,14 @@ Generating user preferences is as easy as using the command-line tool you just `
 
 .. code:: none
 
-     kneejerk --input-dir im_dir --output-dir . --file-name preferences.csv --shuffle True
+     kneejerk score --input_dir im_dir --output_dir . --file_name preferences.csv
 
-After you've generated your ``preferences.csv``, loading the data into ``X, y`` pairs of ``numpy.array`` 's looks like
+After you've generated your ``preferences.csv`` you can transfer all of the images to the proper directory structure via
 
-.. code:: python
+.. code:: none
 
-    from kneejerk.data.loader import transfer_normalized_image_data
+    kneejerk transfer --file_name preferences.csv
+
 
 From there, you're all set to use the ``ImageDataGenerator.flow_from_directory()`` functionality in `keras <https://keras.io/preprocessing/image/>`_, or any similar library.
 
