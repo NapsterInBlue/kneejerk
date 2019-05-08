@@ -9,6 +9,7 @@ A package for scoring image data with your quick, kneejerk reactions, then organ
     :Caption: Contents
 
     tutorial.rst
+    on_image_dimensions.rst
     developing.rst
 
 
