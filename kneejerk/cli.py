@@ -85,7 +85,7 @@ def transfer(ctx, file_name, consider_size, rescale_len, trainpct, testpct, valp
         for class_ in classes:
             _ensure_path_exists(os.path.join(dirname, split, class_))
 
-    test, train, cross_val = segment_data_from_csv(trainpct, testpct, valpct)
+    train, test, cross_val = segment_data_from_csv(trainpct, testpct, valpct)
 
     transfer_normalized_image_data(train, 'train')
     transfer_normalized_image_data(test, 'test')
