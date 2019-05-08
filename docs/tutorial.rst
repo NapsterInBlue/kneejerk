@@ -146,7 +146,7 @@ Your results will likely vary here, depending on how you initially scored the im
 
 .. code:: none
 
-  kneejerk transfer --file_name example.csv
+  kneejerk transfer -f example.csv --trainpct .7 --valpct .2 --testpct .1
 
 
 It will think for a minute, then when it's finished running, your directory should look like
