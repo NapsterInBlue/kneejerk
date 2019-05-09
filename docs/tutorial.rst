@@ -50,6 +50,7 @@ Doing this is as simple as typing ``kneejerk score`` and then populating the fol
 - ``-s``, shuffle the order that images are served up. Choose between ``0/1``, defaulted to ``0``
 - ``--min``, the minimum accepted value you input when scoring, defaulted to ``0``
 - ``--max``, the maximum accepted value you input when scoring, defaulted to ``1``
+- ``-l``, limit the number of images to score, defaulted to all
 
 
 On Our Data
