@@ -25,10 +25,12 @@ def main(ctx):
               default='output.csv')
 @click.option('--min', 'min_', help='Minimum acceptable score', default='0')
 @click.option('--max', 'max_', help='Maximum acceptable score', default='1')
+@click.option('--limit', '-l', help="Limit the number of images to serve")
 @click.pass_context
-def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_):
+def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_, limit):
     ctx.obj['min_val'] = min_
     ctx.obj['max_val'] = max_
+    ctx.obj['limit'] = int(limit)
 
     if file_name[-4:] != '.csv':
         file_name += '.csv'

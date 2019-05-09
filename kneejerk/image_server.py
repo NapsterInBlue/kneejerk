@@ -2,6 +2,7 @@ import sys
 import os
 import pathlib
 import random
+import itertools
 
 import cv2
 import click
@@ -17,18 +18,20 @@ fpaths = []
 scores = []
 
 
-def score_images_in_dir(input_dir, shuffle_files=True):
+@click.pass_context
+def score_images_in_dir(ctx, input_dir, shuffle_files=True):
     """
     Given an input directory where images are located
     will serve up images for user scoring
     """
+    image_limit = ctx.obj.get('limit', None)
     input_dir_path = pathlib.Path(input_dir)
 
     files_in_dir = os.listdir(input_dir)
     if shuffle_files:
         random.shuffle(files_in_dir)
 
-    for impath in files_in_dir:
+    for impath in itertools.islice(files_in_dir, image_limit):
         if str(impath[-4:]).lower() not in ['.png', '.jpg']:
             continue
 
