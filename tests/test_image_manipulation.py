@@ -41,7 +41,6 @@ class TestSquares(TestCase):
 
 class TestFindDims(TestCase):
     def test_biggest_dim(self):
-        print(HERE)
         max_image_dim = _get_max_image_dim(str(HERE) + '/tests/squares.csv')
         assert max_image_dim == 400
 
