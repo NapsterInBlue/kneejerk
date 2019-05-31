@@ -30,7 +30,8 @@ def main(ctx):
 def score(ctx, output_dir, input_dir, file_name, shuffle, min_, max_, limit):
     ctx.obj['min_val'] = min_
     ctx.obj['max_val'] = max_
-    ctx.obj['limit'] = int(limit)
+    if limit:
+        ctx.obj['limit'] = int(limit)
 
     if file_name[-4:] != '.csv':
         file_name += '.csv'
