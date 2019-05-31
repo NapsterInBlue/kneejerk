@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>kneejerk &mdash; kneejerk  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> kneejerk
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="on_image_dimensions.html">On Image Dimensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">kneejerk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>kneejerk</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="kneejerk">
+<h1>kneejerk<a class="headerlink" href="#kneejerk" title="Permalink to this headline">¶</a></h1>
+<p>A package for scoring image data with your quick, kneejerk reactions, then organizing them for ingestion to Data Science pipelines</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#example-project">Example Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#scoring">Scoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#transferring">Transferring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="on_image_dimensions.html">On Image Dimensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="on_image_dimensions.html#resolving-rectangles">Resolving Rectangles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="on_image_dimensions.html#resolving-image-sizes">Resolving Image Sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="on_image_dimensions.html#rescaling-images">Rescaling Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>kneejerk<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Image data can be messy.</p>
+<p>Especially when considering the time it takes to label, persist, load, and operate– generating datasets for user-preference Machine Learning projects can be a costly task.</p>
+<p>The main goal of <code class="docutils literal notranslate"><span class="pre">kneejerk</span></code> is to allow users to <em>quickly</em> key in scores as they’re served images, persist those scores, and formulate a way to quickly load everything into a format consumable by any number of Data Science libraries.</p>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>Ultimately, this library is intended to facilitate getting into the clean workflow outlined in François Chollet’s excellent book <a class="reference external" href="https://www.manning.com/books/deep-learning-with-python">Deep Learning with Python</a>.</p>
+<p><a class="reference external" href="https://github.com/fchollet/deep-learning-with-python-notebooks/blob/master/5.2-using-convnets-with-small-datasets.ipynb">Link to one of his notebooks</a> outlining this workflow on a neat, pre-labeled dataset.</p>
+<p>In particular, we want to go from “big, unified directory of a ton of images” to “well-organized directories of images sorted into test/train/validation sets, by class.” Crucially, though, <strong>we want to do all of this file organization based on preferences that a user quickly generated using this library.</strong></p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.</p>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>Using the tool is as easy as <code class="docutils literal notranslate"><span class="pre">pip</span></code> installing it and leveraging the command line utility</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install kneejerk
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-package">
+<h3>Using the Package<a class="headerlink" href="#using-the-package" title="Permalink to this headline">¶</a></h3>
+<p>Generating user preferences is as easy as using the command-line tool you just <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> ‘ed.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>kneejerk score --input_dir im_dir --output_dir . --file_name preferences.csv
+</pre></div>
+</div>
+<p>After you’ve generated your <code class="docutils literal notranslate"><span class="pre">preferences.csv</span></code> you can transfer all of the images to the proper directory structure via</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>kneejerk transfer --file_name preferences.csv
+</pre></div>
+</div>
+<p>From there, you’re all set to use the <code class="docutils literal notranslate"><span class="pre">ImageDataGenerator.flow_from_directory()</span></code> functionality in <a class="reference external" href="https://keras.io/preprocessing/image/">keras</a>, or any similar library.</p>
+<p>See the <a class="reference internal" href="tutorial.html#tutorial"><span class="std std-ref">Tutorial</span></a> section in the documentation for more clarification on how this all works as well as some of the customization options.</p>
+</div>
+</div>
+<div class="section" id="project-goals">
+<h2>Project Goals<a class="headerlink" href="#project-goals" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="done">
+<h3>Done<a class="headerlink" href="#done" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Quick command line interface that:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Points at a directory and combs through all images</li>
+<li>Allows user to key in preference scores</li>
+<li>Saves results to <code class="docutils literal notranslate"><span class="pre">.csv</span></code> of (filepath, score)</li>
+<li>Allow for random shuffling of the order of images shown</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Loader that converts from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and image files to <code class="docutils literal notranslate"><span class="pre">numpy</span></code></p>
+</li>
+<li><p class="first">Handle necessary data cleaning to resolve size mismatches</p>
+</li>
+<li><p class="first">Published on PyPI</p>
+</li>
+</ul>
+</div>
+<div class="section" id="todo">
+<h3>ToDo<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Unit tests</li>
+<li>Documentation :)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>Bugs and Feature Requests should come in the form of <a class="reference external" href="https://github.com/NapsterInBlue/kneejerk/issues">Issues in the project</a></p>
+<p>Contributions should only be made via <a class="reference external" href="https://github.com/NapsterInBlue/kneejerk/pulls">Pull Requests</a>, <em>after</em> an appropriate Issue has been opened.</p>
+<p>Please see our <a class="reference external" href="https://github.com/NapsterInBlue/kneejerk/blob/master/.github/CONTRIBUTING.md">contribution guide</a> if you’ve got more questions than that!</p>
+<div class="section" id="running-the-tests">
+<h3>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h3>
+<p>This project uses a simple combination of the <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> object and <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. All code should be tested, and all tests should be run from the root of the project via the simple call:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Huge shout-out to <a class="reference external" href="https://github.com/avlaskin">avlaskin</a> on GitHub for early collaboration via his slick library <code class="docutils literal notranslate"><span class="pre">quickLabel</span></code>, a really cool <code class="docutils literal notranslate"><span class="pre">TkInter</span></code> interface that does a very similar task. My data processing extended beyond the scope of his library and so I figured I’d start from scratch instead of blow up his PR feed :)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, NapsterInBlue
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+<br></br>
+<div class="admonition-questions-concerns-good-ideas admonition">
+<p class="first admonition-title">Questions? Concerns? Good Ideas?</p>
+<p class="last">Come join the conversation on the <a class="reference external" href="https://www.google.com">Issues Page</a>!</p>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

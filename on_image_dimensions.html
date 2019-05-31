@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>On Image Dimensions &mdash; kneejerk  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developing" href="developing.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> kneejerk
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">On Image Dimensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#resolving-rectangles">Resolving Rectangles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resolving-image-sizes">Resolving Image Sizes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-consider-size-false-the-default">Setting <code class="docutils literal notranslate"><span class="pre">consider_size=False</span></code>, the default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-consider-size-true">Setting <code class="docutils literal notranslate"><span class="pre">consider_size=True</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rescaling-images">Rescaling Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developing.html">Developing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">kneejerk</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>On Image Dimensions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/on_image_dimensions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="on-image-dimensions">
+<span id="id1"></span><h1>On Image Dimensions<a class="headerlink" href="#on-image-dimensions" title="Permalink to this headline">¶</a></h1>
+<p>Most of the Machine Learning applications built with image data in mind expect a consistent, often square, image resolution on all of the observations you pipe in.</p>
+<p>This means that one must consider:</p>
+<ul class="simple">
+<li>Oblong, non-square images</li>
+<li>Images of different sizes</li>
+</ul>
+<p>For purposes of demonstration, let’s consider three images that were deliberately rectangular and of mismatched sizes (here, stacked together)</p>
+<a class="reference internal image-reference" href="_images/_stacked.png"><img alt="_images/_stacked.png" src="_images/_stacked.png" style="width: 600px;" /></a>
+<div class="section" id="resolving-rectangles">
+<h2>Resolving Rectangles<a class="headerlink" href="#resolving-rectangles" title="Permalink to this headline">¶</a></h2>
+<p>Before we do any image rescaling, we first ensure that all of our data is a square. We do this by padding our images with <code class="docutils literal notranslate"><span class="pre">(R,</span> <span class="pre">G,</span> <span class="pre">B)</span> <span class="pre">=</span> <span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> black, anchoring the image in the top-left.</p>
+<p>I like how paint.net illustrates this.</p>
+<a class="reference internal image-reference" href="_images/anchor.png"><img alt="_images/anchor.png" src="_images/anchor.png" style="height: 400px;" /></a>
+<p>This will give an image like the following</p>
+<a class="reference internal image-reference" href="_images/bug_fixing_square.jpg"><img alt="_images/bug_fixing_square.jpg" src="_images/bug_fixing_square.jpg" style="width: 600px;" /></a>
+</div>
+<div class="section" id="resolving-image-sizes">
+<h2>Resolving Image Sizes<a class="headerlink" href="#resolving-image-sizes" title="Permalink to this headline">¶</a></h2>
+<p>We coded up two approaches for handing differences in image resolutions, flexible to your use case. Both of which correspond to the <code class="docutils literal notranslate"><span class="pre">--consider_size,</span> <span class="pre">-c</span></code> argument you specify when running <code class="docutils literal notranslate"><span class="pre">kneejerk</span> <span class="pre">transfer</span></code> at the command line.</p>
+<div class="section" id="setting-consider-size-false-the-default">
+<h3>Setting <code class="docutils literal notranslate"><span class="pre">consider_size=False</span></code>, the default<a class="headerlink" href="#setting-consider-size-false-the-default" title="Permalink to this headline">¶</a></h3>
+<p>If you want the size/resolution of your input images to have no bearing on the results of your algorithm/analysis, use this argument.</p>
+<p>After padding each image to a square, it will either up or downscale each image to the same uniform size. (See <a class="reference internal" href="#rescaling"><span class="std std-ref">Rescaling Images</span></a> for more on this.)</p>
+<p>Your resulting images will look like this, layered for comparison.</p>
+<a class="reference internal image-reference" href="_images/_stacked_downscaled.png"><img alt="_images/_stacked_downscaled.png" src="_images/_stacked_downscaled.png" style="width: 600px;" /></a>
+</div>
+<div class="section" id="setting-consider-size-true">
+<h3>Setting <code class="docutils literal notranslate"><span class="pre">consider_size=True</span></code><a class="headerlink" href="#setting-consider-size-true" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, maybe the size of your image <em>is</em> of some importance. Setting this argument to <code class="docutils literal notranslate"><span class="pre">True</span></code> will parse through your input directory to find the largest height/width dimension, and then pad every single image with black until it achieves that resolution.</p>
+<p>Again, we’ll layer the resulting images for comparison.</p>
+<a class="reference internal image-reference" href="_images/_stacked_expanded.png"><img alt="_images/_stacked_expanded.png" src="_images/_stacked_expanded.png" style="width: 600px;" /></a>
+</div>
+</div>
+<div class="section" id="rescaling-images">
+<span id="rescaling"></span><h2>Rescaling Images<a class="headerlink" href="#rescaling-images" title="Permalink to this headline">¶</a></h2>
+<p>Finally, regardless of which image-size-mismatch scheme you elect to use, the final step of the internal <code class="docutils literal notranslate"><span class="pre">transfer()</span></code> method handles for you is rescaling each image to some predetermined <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">X</span> <span class="pre">n</span></code> size, that we call <code class="docutils literal notranslate"><span class="pre">--rescale_len</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">200</span></code>.</p>
+<p>This is commonplace, especially for large images/datasets, as it lowers the memory strain needed to run through your algorithms.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developing.html" class="btn btn-neutral float-right" title="Developing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, NapsterInBlue
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+<br></br>
+<div class="admonition-questions-concerns-good-ideas admonition">
+<p class="first admonition-title">Questions? Concerns? Good Ideas?</p>
+<p class="last">Come join the conversation on the <a class="reference external" href="https://www.google.com">Issues Page</a>!</p>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
