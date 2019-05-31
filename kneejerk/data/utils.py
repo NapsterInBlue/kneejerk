@@ -11,7 +11,7 @@ def _ensure_path_exists(fpath):
         pass
 
 
-def _get_max_image_dim(fpath):
+def _get_max_image_dim(csv_fpath):
     """
     Open up all of the images to see their heights and widths.
     Keep a running max of each, which is returned at the end.
@@ -20,7 +20,7 @@ def _get_max_image_dim(fpath):
     max_height = 0
     max_width = 0
 
-    with open(fpath) as f:
+    with open(csv_fpath) as f:
         for row in f:
             im_path = row.split(',')[0]
             im = cv2.imread(im_path)
