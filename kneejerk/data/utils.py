@@ -23,6 +23,7 @@ def _get_max_image_dim(csv_fpath):
     with open(csv_fpath) as f:
         for row in f:
             im_path = row.split(',')[0]
+            print(im_path)
             im = cv2.imread(im_path)
             height, width, _ = im.shape
 
