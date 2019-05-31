@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.5"
+  - "3.7"
 
 
 # Install the apt prerequisites
@@ -17,6 +17,8 @@ install:
 
 # Build the website
 script:
+  - pip install pytest
+  - python -m pytest
   - cd docs && make html
 
 # Deploy to GitHub pages
