@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import pandas as pd
 import cv2
@@ -23,8 +24,7 @@ def _get_max_image_dim(csv_fpath):
     with open(csv_fpath) as f:
         for row in f:
             im_path = row.split(',')[0]
-            print(im_path)
-            im = cv2.imread(im_path)
+            im = cv2.imread(str(Path(im_path).resolve()))
             height, width, _ = im.shape
 
             if height > max_height:
